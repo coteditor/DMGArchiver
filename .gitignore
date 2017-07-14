@@ -1,0 +1,7 @@
+# macOS
+.DS_Store
+
+# repo
+CotEditor*.app
+CotEditor*.dmg
+appcast*.xml
