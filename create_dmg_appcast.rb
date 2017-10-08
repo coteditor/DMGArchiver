@@ -39,8 +39,9 @@ if Dir.exist?(files) then
 	FileUtils.cp_r("#{files}/.", dmgwork)
 end
 
-# Create dmg
-system "hdiutil create -format UDBZ -srcfolder #{dmgwork} #{dmg}"
+# Create dmg forcing using HFS+
+#   -> Because the APFS is first introduced on macOS High Sierra.
+system "hdiutil create -format UDBZ -fs HFS+ -srcfolder #{dmgwork} #{dmg}"
 FileUtils.rm_rf(dmgwork)
 
 puts "Created dmg for #{version}."
