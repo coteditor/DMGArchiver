@@ -68,7 +68,7 @@ date = File.mtime(dmg).rfc822
 length = File.size(dmg)
 
 
-# craate last item code
+# Create last item code
 if IS_SANDBOXED then
 	latest_item = <<-APPCAST_ITEM
 		<item>
