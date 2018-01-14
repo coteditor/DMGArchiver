@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Create appcast for Sparkle.
+"""Archive .app to DMG file and create appcast for Sparkle.
 
 USAGE:
-    ./createappcast.py path_to_dmg
+    ./createappcast.py
 """
 
 from __future__ import print_function
@@ -23,28 +23,39 @@ __copyright__ = '© 2018 1024jp'
 # const
 APPCAST_NAME = 'appcast.xml'
 APPCAST_BETA_NAME = 'appcast-beta.xml'
-PRIVATE_KEY_PATH = 'sparkle/dsa_priv.pem'
 TEMPLATE_PATH = 'appcast-template.xml'
-WD_PATH = 'CotEditor'
+PRIVATE_KEY_PATH = 'sparkle/dsa_priv.pem'
+SRC_PATH = 'CotEditor'
 
 
-def main(dir_path=WD_PATH):
+class Style:
+    OK = '\033[32m'
+    WARNING = '\033[33m'
+    FAIL = '\033[31m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    END = '\033[0m'
+
+
+ARROW = Style.OK + '==>' + Style.END + ' '
+
+
+def main(src_path=SRC_PATH):
     """Create DMG and appcast.xml files from given directory.
 
     Arguments:
-    dir_path (str) -- Path to the directory to be DMG.
+    src_path (str) -- Path to the directory to be DMG.
     """
     # find application in the working directory
-    print('looking for application in {}'.format(dir_path))
-    for file_ in os.listdir(dir_path):
+    for file_ in os.listdir(src_path):
         if file_.endswith('.app'):
-            app_path = os.path.join(dir_path, file_)
+            app_path = os.path.join(src_path, file_)
             break
     else:
-        print('[error] No application found in diskimage.')
-        return
+        sys.exit(Style.FAIL + '[Error]' + Style.END +
+                 ' No application found in the source folder.')
 
-    # get app info from binary
+    # get app info from Info.plist
     plist_path = os.path.join(app_path, 'Contents', 'Info.plist')
     plist = plistlib.readPlist(plist_path)
     app_name = plist['CFBundleName']
@@ -53,22 +64,21 @@ def main(dir_path=WD_PATH):
     min_system_version = plist['LSMinimumSystemVersion']
     is_prerelease = re.search('[a-z]', version)
 
-    print("found {} {} ({}) ≧ macOS {}".format(
-        app_name, version, build_number, min_system_version))
+    print('📦 ' + Style.BOLD + app_name + ' ' + version + Style.END +
+          ' ({}) ≧ macOS {}'.format(build_number, min_system_version))
 
-    # Create DMG forcing using HFS+
-    #   -> Because the APFS is first introduced on macOS High Sierra.
-    print("creating DMG file...")
+    # create DMG
+    print(ARROW + "Archiving to DMG file...")
     dmg_name = 'CotEditor_{}.dmg'.format(version)
-    run_command('hdiutil create -format UDBZ -fs HFS+ -srcfolder {} {}'
-                .format(dir_path, dmg_name))
+    if not archive(src_path, dmg_name):
+        sys.exit(Style.FAIL + 'Failed.' + Style.END)
     length = os.path.getsize(dmg_name)
 
     # create DSA signature
-    print("creating DSA signature...")
+    print(ARROW + "Creating DSA signature...")
     dsa = create_dsa_signature(dmg_name, PRIVATE_KEY_PATH)
 
-    print("creating appcast...")
+    print(ARROW + "Creating appcast...")
 
     # read template
     template_file = open(TEMPLATE_PATH, 'rU')
@@ -93,7 +103,23 @@ def main(dir_path=WD_PATH):
         with open(APPCAST_NAME, 'w') as f:
             f.write(appcast)
 
-    print('done ☕️')
+    print('☕️ Done.')
+
+
+def archive(src_path, dmg_path):
+    """Create DMG file in HFS+ format.
+
+    HFS+ format is forcedly used because the APFS is first introduced
+    on macOS High Sierra.
+
+    Arguments:
+    src_path (str) -- Path to the source folder.
+    dmg_path (str) -- Path to the distination of the created DMG file.
+    """
+    command = ('hdiutil create -format UDBZ -fs HFS+ -srcfolder {} {}'
+               .format(src_path, dmg_path))
+
+    return run_command(command)
 
 
 def create_dsa_signature(filepath, key_path):
