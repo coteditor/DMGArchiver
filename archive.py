@@ -12,7 +12,7 @@ import os
 import plistlib
 import re
 import sys
-from email.Utils import formatdate
+from email.utils import formatdate
 from string import Template
 
 
