@@ -1,6 +1,6 @@
 # DMG Archiver
 
-[![Build Status](https://travis-ci.org/coteditor/DMGArchiver.svg)](https://travis-ci.org/coteditor/DMGArchiver)
+[![Test Status](https://github.com/coteditor/DMGArchiver/workflows/Test/badge.svg)](https://github.com/coteditor/DMGArchiver/actions)
 
 Script for non-AppStore version releasing.
 
@@ -12,6 +12,6 @@ Script for non-AppStore version releasing.
 
 License
 -----------------------------
-© 2017-2018 1024jp.
+© 2017-2019 1024jp.
 
 The source code is distributed under the terms of the __Apache License, Version 2.0__. See the [LICENSE](LICENSE) for details.
