@@ -20,6 +20,20 @@
         </item>
 
         <item>
+            <title>CotEditor 3.9.7</title>
+            <sparkle:releaseNotesLink xml:lang="en">https://coteditor.com/releasenotes/3.9.7.en.html</sparkle:releaseNotesLink>
+            <sparkle:releaseNotesLink xml:lang="ja">https://coteditor.com/releasenotes/3.9.7.ja.html</sparkle:releaseNotesLink>
+            <pubDate>Sun, 13 Sep 2020 09:00:00 +0900</pubDate>
+            <sparkle:minimumSystemVersion>10.13</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/coteditor/CotEditor/releases/download/3.9.7/CotEditor_3.9.7.dmg"
+                       sparkle:shortVersionString="3.9.7"
+                       sparkle:version="437"
+                       sparkle:dsaSignature="MC0CFHHss3aAD+mQt+6WpNIo4eeoRzXTAhUA5quqtgiKTgGQrggWk2UCwaD8TwY="
+                       length="17754227"
+                       type="application/octet-stream"/>
+        </item>
+
+        <item>
             <title>CotEditor 3.7.8</title>
             <sparkle:releaseNotesLink xml:lang="en">https://coteditor.com/releasenotes/3.7.8.en.html</sparkle:releaseNotesLink>
             <sparkle:releaseNotesLink xml:lang="ja">https://coteditor.com/releasenotes/3.7.8.ja.html</sparkle:releaseNotesLink>
