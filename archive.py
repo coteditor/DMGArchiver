@@ -18,7 +18,7 @@ from string import Template
 
 __date__ = '2018-01-14'
 __author__ = '1024jp'
-__copyright__ = '© 2018 1024jp'
+__copyright__ = '© 2018-2021 1024jp'
 
 # const
 APPCAST_NAME = 'appcast.xml'
@@ -26,6 +26,7 @@ APPCAST_BETA_NAME = 'appcast-beta.xml'
 TEMPLATE_PATH = 'appcast-template.xml'
 PRIVATE_KEY_PATH = 'sparkle/dsa_priv.pem'
 SRC_PATH = 'CotEditor'
+CODESIGN_IDENTITY = 'Developer ID Application: Mineko IMANISHI (HT3Z3A72WZ)'
 
 
 class Style:
@@ -72,6 +73,7 @@ def main(src_path=SRC_PATH):
     dmg_name = 'CotEditor_{}.dmg'.format(version)
     if not archive(src_path, dmg_name):
         sys.exit(Style.FAIL + 'Failed.' + Style.END)
+    codesign(CODESIGN_IDENTITY, dmg_name)
     length = os.path.getsize(dmg_name)
 
     # create DSA signature
@@ -118,6 +120,18 @@ def archive(src_path, dmg_path):
     """
     command = ('hdiutil create -format UDBZ -fs HFS+ -srcfolder {} {}'
                .format(src_path, dmg_path))
+
+    return run_command(command)
+
+
+def codesign(identity, dmg_path):
+    """Codesign DMG file with the given identity.
+
+    rguments:
+    identity (str) -- Codesign identity.
+    dmg_path (str) -- Path to the DMG file to sign.
+    """
+    command = 'codesign --force --sign "{}" {}'.format(identity, dmg_path)
 
     return run_command(command)
 
