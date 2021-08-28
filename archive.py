@@ -95,7 +95,7 @@ def main(src_path=SRC_PATH):
                   'min_system_version': min_system_version,
                   'dmg_name': dmg_name,
                   'length': length,
-                  'signature': dsa,
+                  'dsaSignature': dsa,
               })
 
     # write appcast to file
@@ -133,7 +133,7 @@ def codesign(identity, dmg_path):
     """
     command = 'codesign --force --sign "{}" {}'.format(identity, dmg_path)
 
-    return run_command(command)
+    run_command(command)
 
 
 def create_dsa_signature(filepath, key_path):
