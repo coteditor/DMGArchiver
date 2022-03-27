@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """Archive .app to DMG file and create appcast for Sparkle.
@@ -18,7 +18,7 @@ from string import Template
 
 __date__ = '2018-01-14'
 __author__ = '1024jp'
-__copyright__ = '© 2018-2021 1024jp'
+__copyright__ = '© 2018-2022 1024jp'
 
 # const
 APPCAST_NAME = 'appcast.xml'
@@ -83,7 +83,7 @@ def main(src_path=SRC_PATH):
     print(ARROW + "Creating appcast...")
 
     # read template
-    template_file = open(TEMPLATE_PATH, 'rU')
+    template_file = open(TEMPLATE_PATH, 'r')
     template = Template(template_file.read())
 
     # replace template variables
