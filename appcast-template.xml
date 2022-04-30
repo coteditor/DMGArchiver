@@ -8,6 +8,7 @@
         <item>
             <title>${app_name} ${version}</title>
             <pubDate>${date}</pubDate>
+            ${channel}
             <sparkle:version>${build_number}</sparkle:version>
             <sparkle:shortVersionString>${version}</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>${min_system_version}</sparkle:minimumSystemVersion>

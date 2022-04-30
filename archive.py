@@ -22,7 +22,6 @@ __copyright__ = '© 2018-2022 1024jp'
 
 # const
 APPCAST_NAME = 'appcast.xml'
-APPCAST_BETA_NAME = 'appcast-beta.xml'
 TEMPLATE_PATH = 'appcast-template.xml'
 PRIVATE_KEY_PATH = 'sparkle/dsa_priv.pem'
 SRC_PATH = 'CotEditor'
@@ -63,6 +62,9 @@ def main(src_path=SRC_PATH):
     build_number = plist['CFBundleVersion']
     min_system_version = plist['LSMinimumSystemVersion']
     is_prerelease = re.search('[a-z]', version)
+    
+    channel = '<sparkle:channel>prerelease</sparkle:channel>' if is_prerelease\
+            else ''
 
     print('📦 ' + Style.BOLD + app_name + ' ' + version + Style.END +
           ' ({}) ≧ macOS {}'.format(build_number, min_system_version))
@@ -89,6 +91,7 @@ def main(src_path=SRC_PATH):
                   'app_name': app_name,
                   'version': version,
                   'build_number': build_number,
+                  'channel': channel,
                   'date': formatdate(localtime=True),
                   'min_system_version': min_system_version,
                   'dmg_name': dmg_name,
@@ -97,11 +100,8 @@ def main(src_path=SRC_PATH):
               })
 
     # write appcast to file
-    with open(APPCAST_BETA_NAME, 'w') as f:
+    with open(APPCAST_NAME, 'w') as f:
         f.write(appcast)
-    if not is_prerelease:
-        with open(APPCAST_NAME, 'w') as f:
-            f.write(appcast)
 
     print('☕️ Done.')
 
