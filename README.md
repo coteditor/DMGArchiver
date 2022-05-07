@@ -12,6 +12,6 @@ Script for non-AppStore version releasing.
 
 License
 -----------------------------
-© 2017-2021 1024jp.
+© 2017-2022 1024jp.
 
 The source code is distributed under the terms of the __Apache License, Version 2.0__. See the [LICENSE](LICENSE) for details.
