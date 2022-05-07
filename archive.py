@@ -11,6 +11,7 @@ from __future__ import print_function
 import os
 import plistlib
 import re
+import shutil
 import sys
 from email.utils import formatdate
 from string import Template
@@ -102,6 +103,9 @@ def main(src_path=SRC_PATH):
     # write appcast to file
     with open(APPCAST_NAME, 'w') as f:
         f.write(appcast)
+
+    # move to /arhicve folder
+    shutil.move(dmg_name, 'archive')
 
     print('☕️ Done.')
 
