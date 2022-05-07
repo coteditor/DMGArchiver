@@ -62,9 +62,9 @@ def main(src_path=SRC_PATH):
     build_number = plist['CFBundleVersion']
     min_system_version = plist['LSMinimumSystemVersion']
     is_prerelease = re.search('[a-z]', version)
-    
+
     channel = '<sparkle:channel>prerelease</sparkle:channel>' if is_prerelease\
-            else ''
+        else ''
 
     print('📦 ' + Style.BOLD + app_name + ' ' + version + Style.END +
           ' ({}) ≧ macOS {}'.format(build_number, min_system_version))
