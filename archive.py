@@ -56,7 +56,8 @@ def main(src_path=SRC_PATH):
 
     # get app info from Info.plist
     plist_path = os.path.join(app_path, 'Contents', 'Info.plist')
-    plist = plistlib.readPlist(plist_path)
+    with open(plist_path,'rb') as fp:
+        plist = plistlib.load(fp)
     app_name = plist['CFBundleName']
     version = plist['CFBundleShortVersionString']
     build_number = plist['CFBundleVersion']
