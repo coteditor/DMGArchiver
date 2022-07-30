@@ -38,11 +38,11 @@ class Style:
 ARROW = Style.OK + '==>' + Style.END + ' '
 
 
-def main(src_path=SRC_PATH):
+def main(src_path: str = SRC_PATH):
     """Create DMG and appcast.xml files from given directory.
 
     Arguments:
-    src_path (str) -- Path to the directory to be DMG.
+    src_path -- Path to the directory to be DMG.
     """
     # find application in the working directory
     for file_ in os.listdir(src_path):
@@ -107,12 +107,12 @@ def main(src_path=SRC_PATH):
     print('☕️ Done.')
 
 
-def archive(src_path, dmg_path):
+def archive(src_path: str, dmg_path: str):
     """Create DMG file in HFS+ format.
 
     Arguments:
-    src_path (str) -- Path to the source folder.
-    dmg_path (str) -- Path to the distination of the created DMG file.
+    src_path -- Path to the source folder.
+    dmg_path -- Path to the distination of the created DMG file.
     """
     command = ('hdiutil create -format UDBZ -srcfolder {} {}'
                .format(src_path, dmg_path))
@@ -120,14 +120,14 @@ def archive(src_path, dmg_path):
     return run_command(command)
 
 
-def run_command(command):
+def run_command(command: str) -> str:
     """Run shell command.
 
     Arguments:
-    command (str) -- Shell command.
+    command -- Shell command.
 
     Return:
-    result (str) -- returned value of the command.
+    result -- Returned value of the command.
     """
     process = os.popen(command)
     retval = process.readline()
