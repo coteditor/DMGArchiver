@@ -23,7 +23,6 @@ __copyright__ = '© 2018-2022 1024jp'
 # const
 APPCAST_NAME = 'appcast.xml'
 TEMPLATE_PATH = 'appcast-template.xml'
-PRIVATE_KEY_PATH = 'sparkle/dsa_priv.pem'
 SRC_PATH = 'CotEditor'
 
 
@@ -77,17 +76,13 @@ def main(src_path=SRC_PATH):
         sys.exit(Style.FAIL + 'Failed.' + Style.END)
     length = os.path.getsize(dmg_name)
 
-    # create DSA signature
-    print(ARROW + "Creating DSA signature...")
-    dsa = create_dsa_signature(dmg_name, PRIVATE_KEY_PATH)
-
     print(ARROW + "Creating appcast...")
 
     # read template
     template_file = open(TEMPLATE_PATH, 'r')
     template = Template(template_file.read())
 
-    # replace template variables
+    # replace template variables
     appcast = template.substitute({
                   'app_name': app_name,
                   'version': version,
@@ -97,7 +92,7 @@ def main(src_path=SRC_PATH):
                   'min_system_version': min_system_version,
                   'dmg_name': dmg_name,
                   'length': length,
-                  'dsaSignature': dsa,
+                  'edSignature': '',
               })
 
     # write appcast to file
@@ -122,23 +117,6 @@ def archive(src_path, dmg_path):
     """
     command = ('hdiutil create -format UDBZ -fs HFS+ -srcfolder {} {}'
                .format(src_path, dmg_path))
-
-    return run_command(command)
-
-
-def create_dsa_signature(filepath, key_path):
-    """Create DSA signature for Sparkle framework.
-
-    Arguments:
-    filepath (str) -- Path to a file to create signature.
-    key_path (str) -- Path to DSA private key file.
-
-    Return:
-    signature (str) -- Signature of given file.
-    """
-    command = ('openssl dgst -sha1 -binary < "{}" | '
-               'openssl dgst -dss1 -sign "{}" | '
-               'openssl enc -base64').format(filepath, key_path)
 
     return run_command(command)
 
