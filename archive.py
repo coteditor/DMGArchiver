@@ -76,6 +76,11 @@ def main(src_path=SRC_PATH):
         sys.exit(Style.FAIL + 'Failed.' + Style.END)
     length = os.path.getsize(dmg_name)
 
+    # run generate_appcast
+    print(ARROW + "Generating edSignature...")
+    shutil.move(dmg_name, 'archive')
+    run_command('./generate_appcast archive')
+
     print(ARROW + "Creating appcast...")
 
     # read template
@@ -98,9 +103,6 @@ def main(src_path=SRC_PATH):
     # write appcast to file
     with open(APPCAST_NAME, 'w') as f:
         f.write(appcast)
-
-    # move to /arhicve folder
-    shutil.move(dmg_name, 'archive')
 
     print('☕️ Done.')
 
