@@ -108,14 +108,11 @@ def main(src_path=SRC_PATH):
 def archive(src_path, dmg_path):
     """Create DMG file in HFS+ format.
 
-    HFS+ format is forcedly used because the APFS is first introduced
-    on macOS High Sierra.
-
     Arguments:
     src_path (str) -- Path to the source folder.
     dmg_path (str) -- Path to the distination of the created DMG file.
     """
-    command = ('hdiutil create -format UDBZ -fs HFS+ -srcfolder {} {}'
+    command = ('hdiutil create -format UDBZ -srcfolder {} {}'
                .format(src_path, dmg_path))
 
     return run_command(command)
