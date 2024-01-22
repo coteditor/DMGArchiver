@@ -53,6 +53,12 @@ def main(src_path: str = SRC_PATH):
         sys.exit(Style.FAIL + '[Error]' + Style.END +
                  ' No application found in the source folder.')
 
+    # check existance of Sparkle.framework
+    sparkle_path = app_path + "/Contents/Frameworks/Sparkle.framework"
+    if not os.path.isdir(sparkle_path):
+        sys.exit(Style.FAIL + '[Error]' + Style.END +
+                 ' Sparkle framework is not bundled.')
+
     # get app info from Info.plist
     plist_path = os.path.join(app_path, 'Contents', 'Info.plist')
     with open(plist_path, 'rb') as fp:
