@@ -83,6 +83,7 @@ def main(src_path: str = SRC_PATH):
     length = os.path.getsize(dmg_name)
 
     # run generate_appcast
+    # DerivedData/CotEditor-xxx/SourcePackages/artifacts/sparkle/Sparkle/generate_appcast
     print(ARROW + "Generating edSignature...")
     shutil.move(dmg_name, 'archive')
     run_command('./generate_appcast archive')
