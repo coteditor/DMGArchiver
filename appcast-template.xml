@@ -21,6 +21,21 @@
         </item>
 
         <item>
+            <title>CotEditor 5.2.3</title>
+            <pubDate>Sat, 23 Aug 2025 17:28:00 +0900</pubDate>
+            
+            <sparkle:version>730</sparkle:version>
+            <sparkle:shortVersionString>5.2.3</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <sparkle:releaseNotesLink xml:lang="en">https://coteditor.com/releasenotes/5.2.3.en.html</sparkle:releaseNotesLink>
+            <sparkle:releaseNotesLink xml:lang="ja">https://coteditor.com/releasenotes/5.2.3.ja.html</sparkle:releaseNotesLink>
+            <enclosure url="https://github.com/coteditor/CotEditor/releases/download/5.2.3/CotEditor_5.2.3.dmg"
+                       length="17555057"
+                       type="application/octet-stream"
+                        sparkle:edSignature="VceO3Okj5sPcnnIgk+EfB1w4/UU/g7LANyC360GPGTTtCdtnKfHrsjcjf2tE2xO8uaZl/6/EdMObEbqO5+GOAg=="/>
+        </item>
+
+        <item>
             <title>CotEditor 4.8.7</title>
             <pubDate>Sun, 07 Jul 2024 09:00:00 +0900</pubDate>
             
@@ -34,7 +49,7 @@
             type="application/octet-stream"
             sparkle:edSignature="MJaGCbs6aOC6+6HXfQl9Qzy+K8GcE34X71szG44+Xi3/pPllB0qRjEUz2GHbufHPSzqTz2ilo/f1N1iwzigKBQ=="/>
         </item>
-        
+
         <item>
             <title>CotEditor 4.5.9</title>
             <pubDate>Sun, 10 Sep 2023 22:01:36 +0900</pubDate>
@@ -49,7 +64,7 @@
                        type="application/octet-stream"
                         sparkle:edSignature= "Td/mWzSggIjNMiUOjYarofRiBPTWRM4qnKUg4FtpUr4TXwK7DSNc2Uq7XbY3bTWl1i7TsyGUFj6ZDSWrtOk4DA=="/>
         </item>
-        
+
         <item>
             <title>CotEditor 4.3.2</title>
             <pubDate>Sat, 30 Jul 2022 12:00:00 +0900</pubDate>
